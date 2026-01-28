@@ -8,7 +8,15 @@ export default function Hero() {
     useHeroScene(canvasRef)
 
     useEffect(() => {
-        // GSAP animations
+        // GSAP animations - matching original HTML version
+        gsap.to('.hero-badge', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            delay: 0.1,
+        })
+
         gsap.to('.hero-title', {
             opacity: 1,
             y: 0,
@@ -23,6 +31,14 @@ export default function Hero() {
             duration: 1,
             ease: 'power3.out',
             delay: 0.6,
+        })
+
+        gsap.to('.hero-actions', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            delay: 0.9,
         })
     }, [])
 

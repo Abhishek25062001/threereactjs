@@ -138,3 +138,29 @@ body.cursor-hover #cursor-ring {
     height: 45px;
   }
 }
+
+/* Animation Initial States */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.hero-badge {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.hero-title {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.hero-subtitle {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.hero-actions {
+  opacity: 0;
+  transform: translateY(16px);
+}
