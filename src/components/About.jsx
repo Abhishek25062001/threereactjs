@@ -1,13 +1,16 @@
 import { useRef } from 'react'
 import useAboutScene from '../hooks/useAboutScene'
+import useIntersectionObserver from '../hooks/useIntersectionObserver'
 
 export default function About() {
     const canvasRef = useRef(null)
+    const { targetRef, isIntersecting } = useIntersectionObserver({ threshold: 0.1 })
 
-    useAboutScene(canvasRef)
+    // Only initialize scene when in viewport
+    useAboutScene(canvasRef, isIntersecting)
 
     return (
-        <section id="about" className="section reveal min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
+        <section ref={targetRef} id="about" className="section reveal min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid md:grid-cols-2 gap-10 items-center">
                     <div className="about-text">

@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import * as THREE from 'three'
 
-export default function useAboutScene(canvasRef) {
+export default function useAboutScene(canvasRef, isVisible = true) {
     useEffect(() => {
-        if (!canvasRef.current) return
+        if (!canvasRef.current || !isVisible) return
 
         // Mobile Check
         const isMobile = window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
@@ -87,5 +87,5 @@ export default function useAboutScene(canvasRef) {
             geometry.dispose()
             material.dispose()
         }
-    }, [canvasRef])
+    }, [canvasRef, isVisible])
 }

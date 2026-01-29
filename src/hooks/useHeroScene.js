@@ -10,13 +10,20 @@ export default function useHeroScene(canvasRef) {
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
         camera.position.z = 30
 
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
-        renderer.setSize(window.innerWidth, window.innerHeight)
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        const isMobile = window.innerWidth < 768 || /Android|iPhone|iPad/i.test(navigator.userAgent)
 
-        // Particles
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            alpha: true,
+            antialias: !isMobile, // Disable antialias on mobile
+            powerPreference: isMobile ? 'low-power' : 'high-performance'
+        })
+        renderer.setSize(window.innerWidth, window.innerHeight)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 1.5)) // Limit pixel ratio
+
+        // Particles - reduced count for better performance
         const particlesGeometry = new THREE.BufferGeometry()
-        const count = 2000
+        const count = isMobile ? 500 : 1000 // Reduced from 2000
         const positions = new Float32Array(count * 3)
 
         for (let i = 0; i < count * 3; i++) {

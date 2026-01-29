@@ -1,16 +1,18 @@
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Vault from './components/Vault'
-import Social from './components/Social'
 import Footer from './components/Footer'
 import CustomCursor from './components/CustomCursor'
 import ScrollToTop from './components/ScrollToTop'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+// Lazy load heavy components
+const Projects = lazy(() => import('./components/Projects'))
+const Vault = lazy(() => import('./components/Vault'))
+const Social = lazy(() => import('./components/Social'))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -39,9 +41,11 @@ function App() {
       <Hero />
       <About />
       <Skills />
-      <Projects />
-      <Vault />
-      <Social />
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-green-400">Loading...</div></div>}>
+        <Projects />
+        <Vault />
+        <Social />
+      </Suspense>
       <Footer />
       <ScrollToTop />
     </div>
